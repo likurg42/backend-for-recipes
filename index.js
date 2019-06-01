@@ -32,6 +32,6 @@ app.use((err, req, res, next) => {
 })
 
 // listen for requests 
-app.listen(process.env.port || 4007, () => { // process.env.port - heroku port
+app.listen(process.env.PORT || 4007, () => { // process.env.port - heroku port
   console.log('now listening for requests');
 }); 
