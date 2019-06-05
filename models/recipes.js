@@ -11,9 +11,7 @@ const RecipeSchema = new Schema({
   steps: [{
     stepDescription: [String],
     timer: Number
-  }],
-  timers: [Number]
-
+  }]
 });
 
 const Recipe = mongoose.model("recipe", RecipeSchema);
