@@ -8,7 +8,10 @@ const RecipeSchema = new Schema({
     required: [true, "Name field is required"]
   },
   ingredients: [String],
-  steps: [String],
+  steps: [{
+    stepDescription: [String],
+    timer: Number
+  }],
   timers: [Number]
 
 });
