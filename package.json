@@ -1,7 +1,7 @@
 {
-  "name": "net-nija-rest-api",
+  "name": "test-backend",
   "version": "1.0.0",
-  "description": "rest api tutorial",
+  "description": "Test backend for projects",
   "main": "index.js",
   "scripts": {
     "start": "node index",
