@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-
+const cors = require('cors');
 
 /* Set up express up */
 const app = express(); // http magic in background
@@ -9,6 +9,7 @@ const app = express(); // http magic in background
 // MongodDB Atlas Driver
 const recipes = "mongodb+srv://nitar:qwas123qwe@cluster0-aeadb.gcp.mongodb.net/recipes?retryWrites=true&w=majority";
 const todos = "mongodb+srv://nitar:qwas123qwe@cluster0-aeadb.gcp.mongodb.net/todos?retryWrites=true&w=majority";
+
 
 
 /* Connect to mongodb */
@@ -26,6 +27,8 @@ app.use(bodyParser.json());
 /* Initialize routes */
 app.use('/api', require('./routes/api')); // app will use our routes
 
+// Enable CORS
+app.use(cors());
 
 /* Error handling middleware */
 app.use((err, req, res, next) => {
