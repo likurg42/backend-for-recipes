@@ -7,6 +7,11 @@ const Todos = require("../models/todos");
 
 /* TODO API */
 router.get('/todos', (req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
+  res.setHeader('Access-Control-Allow-Credentials', true); // If needed
+
   console.log('get');
   Todos.find().then(todo => res.send(todo)).catch(next);
 })
