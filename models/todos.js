@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 
 //create Recipe Schema & model
 const TodosScema = new Schema({
-  text: {
+  title: {
     type: String,
     required: true
   },
-  isItDone: {
+  completed: {
     type: Boolean,
     required: true
   }
