@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 app.use('/api', require('./routes/api')); // app will use our routes
 
 // Enable CORS
-app.use(cors());
+app.use(cors({origin: '*'}));
 
 /* Error handling middleware */
 app.use((err, req, res, next) => {
