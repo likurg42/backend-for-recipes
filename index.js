@@ -24,11 +24,15 @@ app.use(express.static('public'));
 
 app.use(bodyParser.json());
 
+app.use(cors({origin: '*'}));
+
+
 /* Initialize routes */
 app.use('/api', require('./routes/api')); // app will use our routes
 
 // Enable CORS
-app.use(cors({origin: '*'}));
+
+
 
 /* Error handling middleware */
 app.use((err, req, res, next) => {
@@ -38,6 +42,6 @@ app.use((err, req, res, next) => {
 })
 
 // listen for requests 
-app.listen(process.env.PORT || 4007, () => { // process.env.port - heroku port
+app.listen(process.env.PORT || 8080, () => { // process.env.port - heroku port
   console.log('now listening for requests');
 }); 
