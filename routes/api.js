@@ -9,7 +9,7 @@ const Todos = require("../models/todos");
 router.get('/todos', (req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,origin, content-type, accept'); // If needed
   res.setHeader('Access-Control-Allow-Credentials', true); // If needed
 
   console.log('get');
@@ -19,16 +19,16 @@ router.get('/todos', (req, res, next) => {
 router.get("/todos/:id", (req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, origin, content-type, accept'); // If needed
   res.setHeader('Access-Control-Allow-Credentials', true); // If needed
-  
+
   Todos.findById({ _id: req.params.id }).then(todos => res.send(todo).catch(next));
 });
 
 router.post("/todos", (req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,origin, content-type, accept'); // If needed
   res.setHeader('Access-Control-Allow-Credentials', true); // If needed
 
   console.log(req.body); // show data being added
@@ -42,7 +42,7 @@ router.post("/todos", (req, res, next) => {
 router.put("/todos/:id", (req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,origin, content-type, accept'); // If needed
   res.setHeader('Access-Control-Allow-Credentials', true); // If needed
 
   Todos.findByIdAndUpdate({ _id: req.params.id }, req.body).then(() => {
