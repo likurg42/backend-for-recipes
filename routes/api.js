@@ -17,10 +17,12 @@ router.get('/todos', (req, res, next) => {
 })
 
 router.get("/todos/:id", (req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
   Todos.findById({ _id: req.params.id }).then(todos => res.send(todo).catch(next));
 });
 
 router.post("/todos", (req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
   console.log(req.body); // show data being added
   Todos.create(req.body)
     .then(todo => {
@@ -29,7 +31,9 @@ router.post("/todos", (req, res, next) => {
     .catch(next);
 });
 
-router.put("/recipes/:id", (req, res, next) => {
+router.put("/todos/:id", (req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
   Todos.findByIdAndUpdate({ _id: req.params.id }, req.body).then(() => {
     Todos.findOne({ _id: req.params.id })
       .then(todo => res.send(todo))
@@ -37,7 +41,9 @@ router.put("/recipes/:id", (req, res, next) => {
   });
 });
 
-router.delete("/recipes/:id", (req, res, next) => {
+router.delete("/todos/:id", (req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
   Todos.findByIdAndRemove({ _id: req.params.id })
     .then(todo => {
       res.send(todo);
