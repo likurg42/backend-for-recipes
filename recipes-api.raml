@@ -1,0 +1,96 @@
+#%RAML 1.0
+title: Recipes API
+documentation: 
+  - title:  API для Рецептов
+    contnet: |
+      API для рецептов повзоляет вам добавлять свои рецепты с их ингредиентами, последовательными инструкциями с картинками и таймером. Для удобства и поиска нужных рецептов рекомендуется добавлять тэги, соответствующие вашему блюду.
+version: v1
+baseUri: https://backend-for-recipes.herokuapp.com/api/
+mediaType: application/json
+types:
+
+
+  Step:
+    type: object
+    properties:
+      stepDescription: 
+        type: array
+        required: true
+        items: string
+      stepImage: 
+        type: array
+        required: false
+        items: any
+      timer:
+        type: number
+        required: true
+
+  Recipe:
+    type: object
+    properties: 
+          name: string
+          ingredients: 
+            type: array
+            items: string
+            required: false
+          steps: 
+            type: array
+            items: Step
+          tags: 
+            type: array
+            items: string
+            required: false
+  Recipes:
+    type: array
+    items: Recipe
+
+/recipes:
+  get:
+    description: Возвращает все рецепты из базы данных
+    responses:
+      200:
+        body:
+          application/json:
+                      type: Recipes
+                      example: !include examples/get-recipe.json
+  post:
+    description: Добавить рецепт в базу данных
+    body:
+      application/json:
+              type: Recipe
+              example: !include examples/post-recipe.json
+    responses:
+      200:
+        body:
+          application/json:
+                      type: Recipes
+                      example: !include examples/get-recipe.json
+/recipes/{id}:
+  get:
+    description:  Возвращает рецепт по ID
+    responses:
+      200:
+        body:
+          application/json:
+                      type: Recipes
+                      example: !include examples/get-recipe.json
+  put:
+    description: Обновить рецепт по ID
+    body: 
+      application/json:
+              example:
+                name: Новое имя
+    responses: 
+            200:
+              body:
+                application/json:
+                          type: Recipes
+                          example: !include examples/get-recipe.json
+  delete:
+    description: Удалить рецепт по ID
+    responses: 
+          200:
+            body:
+              application/json:
+                              type: Recipes
+                              example: !include examples/get-recipe.json

@@ -6,7 +6,6 @@
   "scripts": {
     "start": "node index",
     "dev": "nodemon index",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "quit": "node nodemon-quit"
   },
   "author": "nikolay",
@@ -16,6 +15,8 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^5.5.11",
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "raml2html": "^7.4.0",
+    "raml2obj": "^6.5.0"
   }
 }
