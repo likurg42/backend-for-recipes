@@ -16,10 +16,10 @@
     },
     "dependencies": {
         "body-parser": "^1.19.0",
-        "cookie-parserAdd": "^1.4.4",
-        "cors": "^2.8.Add5",
-        "debug": "^4.1Add.1",
-        "dotenv": "^8.Add1.0",
+        "cookie-parser": "^1.4.4",
+        "cors": "^2.8.5",
+        "debug": "^4.1.1",
+        "dotenv": "^8.1.0",
         "express": "^4.17.1",
         "firebase": "^7.0.0",
         "http-errors": "^1.7.3",
@@ -44,7 +44,7 @@
         "gulp-sass": "^4.0.2",
         "gulp-sourcemaps": "^2.6.5",
         "gulp-uglify": "^3.0.2",
-        "sass": "^1.23.0-module.beta.1",
+        "sass": "^1.22.12",
         "vinyl-buffer": "^1.0.1",
         "vinyl-source-stream": "^2.0.0"
     },
