@@ -1,0 +1,11 @@
+extends layout/layout.pug
+block content
+    .form-container
+        .form-row
+            h1 Тест загрузки картинок
+            label(for="fileButton")
+            input(type="file" name="image" id="fileButton")
+            progress(value="0" max="100" id="upload-progress-bar")
+            a.upload-url
+        button.upload-button Загрузить
+    script(src="js/main-firestore-test.bundle.js")

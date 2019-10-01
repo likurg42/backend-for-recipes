@@ -1,0 +1,16 @@
+extends layout/layout.pug
+block content
+    section.form-section
+        .container.container--form-container
+            h1.header Добавить рецепт
+            form(action="/api/recipes" class="form" enctype="multipart/form-data" method="post")
+                h2.form__header Описание Рецепта
+                .form__group
+                    label.form__label(for="recipeName") Название рецепта
+                    input.form__input(type="text" name="recipeName" id="recipeName")
+                .form__group
+                    label.form__label(for="recipeDescription") Название рецепта
+                    textarea.form__input.form__input--big(name="recipeDescription" id="recipeDescription")
+
+
+    script(src='js/main-script.bundle.js')

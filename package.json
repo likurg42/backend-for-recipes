@@ -1,22 +1,51 @@
 {
-  "name": "dev-backend",
-  "version": "1.0.0",
-  "description": "Test backend for projects",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index",
-    "dev": "nodemon index",
-    "quit": "node nodemon-quit"
-  },
-  "author": "nikolay",
-  "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "mongoose": "^5.5.11",
-    "nodemon": "^1.19.1",
-    "raml2html": "^7.4.0",
-    "raml2obj": "^6.5.0"
-  }
+    "name": "dev-backend",
+    "version": "1.0.0",
+    "description": "Test backend for projects",
+    "main": "index.js",
+    "scripts": {
+        "dev": "gulp",
+        "logs": "pm2 flush && pm2 logs --lines 1000",
+        "start": "pm2 start bin/www.js --watch",
+        "stop": "pm2 stop bin/www.js"
+    },
+    "author": "nikolay",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "cookie-parser": "^1.4.4",
+        "cors": "^2.8.5",
+        "debug": "^4.1.1",
+        "dotenv": "^8.1.0",
+        "express": "^4.17.1",
+        "firebase": "^7.0.0",
+        "http-errors": "^1.7.3",
+        "mongoose": "^5.7.1",
+        "morgan": "^1.9.1",
+        "multer": "^1.4.2",
+        "pm2": "^3.5.1",
+        "pug": "^2.0.4"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.6.2",
+        "@babel/preset-env": "^7.6.2",
+        "babelify": "^10.0.0",
+        "browser-sync": "^2.26.7",
+        "browserify": "^16.5.0",
+        "event-stream": "^4.0.1",
+        "firebase-tools": "^7.4.0",
+        "glob": "^7.1.4",
+        "gulp": "^4.0.2",
+        "gulp-concat": "^2.6.1",
+        "gulp-rename": "^1.4.0",
+        "gulp-sass": "^4.0.2",
+        "gulp-sourcemaps": "^2.6.5",
+        "gulp-uglify": "^3.0.2",
+        "sass": "^1.23.0-module.beta.1",
+        "vinyl-buffer": "^1.0.1",
+        "vinyl-source-stream": "^2.0.0"
+    },
+    "browserslist": [
+        "last 15 versions"
+    ]
 }
