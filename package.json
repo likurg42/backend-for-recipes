@@ -6,7 +6,7 @@
     "scripts": {
         "dev": "gulp",
         "logs": "pm2 flush && pm2 logs --lines 1000",
-        "start": "pm2 start bin/www.js",
+        "start": "pm2-runtime start ecosystem.config.js --env production",
         "stop": "pm2 stop bin/www.js"
     },
     "author": "nikolay",

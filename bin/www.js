@@ -13,6 +13,7 @@ const app = require('../app')
  * Get port from environment and store in exporess
  */
 const port = normalizePort(process.env.PORT || '3000');
+console.log('port', port);
 app.set('port', port);
 
 
