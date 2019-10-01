@@ -6,17 +6,17 @@
     "scripts": {
         "dev": "gulp",
         "logs": "pm2 flush && pm2 logs --lines 1000",
-        "start": "pm2 start bin/www.js --watch",
+        "start": "pm2 start bin/www.js",
         "stop": "pm2 stop bin/www.js"
     },
     "author": "nikolay",
     "license": "ISC",
     "dependencies": {
         "body-parser": "^1.19.0",
-        "cookie-parser": "^1.4.4",
-        "cors": "^2.8.5",
-        "debug": "^4.1.1",
-        "dotenv": "^8.1.0",
+        "cookie-parserAdd": "^1.4.4",
+        "cors": "^2.8.Add5",
+        "debug": "^4.1Add.1",
+        "dotenv": "^8.Add1.0",
         "express": "^4.17.1",
         "firebase": "^7.0.0",
         "http-errors": "^1.7.3",
