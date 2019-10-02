@@ -5,7 +5,6 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/example', (req, res) => {
-    console.log('exaple');
     res.render('example', { title: "hi", header: "It' me" })
 })
 

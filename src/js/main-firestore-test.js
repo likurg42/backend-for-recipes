@@ -18,19 +18,14 @@ const uploadProgressBar = document.getElementById('upload-progress-bar');
 const fileButton = document.getElementById('fileButton');
 const uploadButton = document.querySelector('.upload-button');
 const uploadUrl = document.querySelector('.upload-url');
-console.log(uploadProgressBar, fileButton, uploadButton);
 
 fileButton.addEventListener('change', e => {
     // Get file
     const file = e.target.files[0];
-    console.log('file:', file);
-
 
     // Create storage ref
     const date = new Date();
-    console.log('date:', date.getTime())
     const storageRef = firebase.storage().ref(`images-for-recipes/id/${date.getTime()}`);
-    console.log('storage-ref:', storageRef);
 
 
     // Upload file
