@@ -13,14 +13,12 @@ router.use(express.json());
 
 // get a list of recipes from the db
 router.get("/recipes", (req, res, next) => {
-    if (Object.keys(req.query).length > 0) {
-        Recipes.findRecipes(req.query).then(result => res.send(result)).catch(err => console.error(err));
-    } else {
-        Recipes.find({}).then(result => res.send(result)).catch(err => console.error(err));
-    }
+    Recipes.getFullRecipes(req.query).then(result => res.send(result)).catch(err => console.error(err));
+
 });
 
 router.get("/recipes/min/", (req, res, next) => {
+    Recipes.getMinRecipes(req.query).then(result => res.send(result)).catch(err => console.error(err));
 })
 
 

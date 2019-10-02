@@ -31,9 +31,6 @@ const RecipeSchema = new Schema({
     categories: [{
         type: String,
     }],
-    tags: [{
-        type: String,
-    }],
     originalRecipeUrl: String,
     rating: Number,
     difficulty: {
@@ -58,21 +55,41 @@ const RecipeSchema = new Schema({
 RecipeSchema.index({ name: 'text' });
 
 RecipeSchema.statics = {
-    findRecipes: function (query, callback) {
-        let mongoSearch = {};
-        Object.keys(query).forEach(key => {
-            if (query[key] !== null && key === 'name') {
-                mongoSearch.name = new RegExp(query[key], "gi");
-            }
-            if (query[key] !== null && Array.isArray(query[key]) && key === 'categories') {
-                mongoSearch.categories = { "$in": query[key] }
-            }
-            if (query[key] !== null && Array.isArray(query[key]) && key === 'tags') {
-                mongoSearch.tags = { "$in": query[key] }
-            }
-        })
-        return this.find(mongoSearch, callback);
+    parseQuery: function (query) {
+        let mongoQuery = {};
+        const queryKeys = Object.keys(query);
+        if (queryKeys.length > 0) {
+            queryKeys.forEach(key => {
+                if (query[key] !== null && key === 'name') {
+                    mongoQuery.name = new RegExp(query[key], "gi");
+                }
+                if (query[key] !== null && Array.isArray(query[key]) && key === 'categories') {
+                    mongoQuery.categories = { "$in": query[key] }
+                }
+                if (query[key] !== null && Array.isArray(query[key]) && key === 'tags') {
+                    mongoQuery.tags = { "$in": query[key] }
+                }
+            })
+            return mongoQuery;
+        };
+
+        return mongoQuery
+    },
+    getFullRecipes: function (query, cb) {
+        return this.find(this.parseQuery(query), cb);
+    },
+    getMinRecipes: function (query, cb) {
+        return this.find(this.parseQuery(query), {
+            "_id": 1,
+            "name": 1,
+            "description": 1,
+            "categories": 1,
+            "rating": 1,
+            "difficulty": 1,
+            "timeToComplete": 1
+        }, cb)
     }
+
 }
 
 const Recipe = mongoose.model("recipe", RecipeSchema);
