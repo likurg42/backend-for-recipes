@@ -1,0 +1,22 @@
+@import 'mixins';
+
+@include font-face('Material Icons', '../fonts/material-icons/MaterialIcons-Regular');
+@include font-face('Merriweather', '../fonts/merriweather/merriweatherbold', 900); // black
+@include font-face('Open Sans', '../fonts/opensans/opensans', 400); // regular
+@include font-face('Open Sans', '../fonts/opensans/opensanssemibold', 600); // semi-bold
+
+.material-icons {
+    direction: ltr;
+    display: inline-block;
+    font-family: 'Material Icons';
+    font-size: 24px;
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: normal;
+    line-height: 1;
+    text-transform: none;
+    white-space: nowrap;
+    word-wrap: normal;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}

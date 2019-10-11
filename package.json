@@ -16,6 +16,7 @@
     },
     "dependencies": {
         "body-parser": "^1.19.0",
+        "compression": "^1.7.4",
         "cookie-parser": "^1.4.4",
         "cors": "^2.8.5",
         "debug": "^4.1.1",
@@ -27,15 +28,23 @@
         "morgan": "^1.9.1",
         "multer": "^1.4.2",
         "pm2": "^3.5.1",
-        "pug": "^2.0.4"
+        "pug": "^2.0.4",
+        "choices.js": "^7.0.0"
     },
     "devDependencies": {
         "@babel/core": "^7.6.2",
         "@babel/preset-env": "^7.6.2",
+        "babel-loader": "^8.0.6",
         "babelify": "^10.0.0",
         "browser-sync": "^2.26.7",
         "browserify": "^16.5.0",
+        "compression-webpack-plugin": "^3.0.0",
+        "eslint": "^6.5.1",
+        "eslint-config-airbnb-base": "^14.0.0",
+        "eslint-plugin-import": "^2.18.2",
+        "eslint-plugin-prettier": "^3.1.1",
         "event-stream": "^4.0.1",
+        "fast-async": "^7.0.6",
         "firebase-tools": "^7.4.0",
         "glob": "^7.1.4",
         "gulp": "^4.0.2",
@@ -45,8 +54,11 @@
         "gulp-sourcemaps": "^2.6.5",
         "gulp-uglify": "^3.0.2",
         "sass": "^1.22.12",
+        "terser-webpack-plugin": "^2.1.2",
         "vinyl-buffer": "^1.0.1",
-        "vinyl-source-stream": "^2.0.0"
+        "vinyl-source-stream": "^2.0.0",
+        "webpack": "^4.41.0",
+        "webpack-stream": "^5.2.1"
     },
     "browserslist": [
         "last 15 versions"

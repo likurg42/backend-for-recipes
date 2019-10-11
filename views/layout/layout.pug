@@ -7,4 +7,8 @@ html(lang="ru")
         link(rel="stylesheet" href="style/style.css")
         title= title
     body
-        block content
+        include ../includes/main-header.pug
+        block main
+        include ../includes/main-footer.pug
+        block extra
+        script(src="js/script.min.js")

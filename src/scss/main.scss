@@ -1,0 +1,361 @@
+@import 'mixins';
+@import 'fonts';
+@import 'choices';
+
+$background-color: #f6f6f6;
+$color-accent: rgb(0, 150, 136);
+$color-primary: rgb(229, 155, 68);
+$input-backgroud: #f5f5f5;
+$input-border-color: #e5e5e5;
+$color-gray: #d3d3d3;
+
+$heading-font: 700 32px 'Merriweather', serif;
+$label-font: 600 22px 'Open Sans', sans-serif;
+$input-font: 400 20px 'Open Sans', sans-serif;
+
+html {
+    box-sizing: border-box;
+}
+
+* {
+    &,
+    &:after,
+    &:before {
+        box-sizing: inherit;
+    }
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    z-index: 999;
+}
+
+.visually-hidden {
+    display: none;
+}
+
+.choices,
+.choices__list--multiple .choices__item,
+.choices__list--multiple .choices__item.is-highlighted {
+    font: $input-font;
+}
+
+.choices__list--multiple .choices__item,
+.choices__list--multiple .choices__item.is-highlighted {
+    background-color: $color-accent;
+    border-color: $color-accent;
+    font-size: 14px;
+}
+
+.container {
+    margin: 0px;
+    padding: 0px;
+    max-width: 1200px;
+    min-height: 200vh;
+
+    &--add-recipe {
+        max-width: 100%;
+        background-color: $background-color;
+    }
+
+    &--firestore-test {
+        max-width: 800px;
+    }
+}
+
+.section-add-recipe {
+    // width of form 640px, width of container 800px
+    max-width: 660px;
+    margin: 0 auto;
+    padding: 0 10px;
+
+    &__heading {
+        margin: 0;
+        padding: 0;
+        font: 900 42px 'Merriweather', serif;
+        text-align: center;
+    }
+}
+
+.firestore-test {
+    display: flex;
+    min-height: 100vh;
+    min-width: 100%;
+    padding: 0;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &__form {
+        width: 100%;
+    }
+
+    &__file-input {
+        width: 100%;
+    }
+
+    &__upload-button {
+        margin-top: 10px;
+    }
+
+    &__progress {
+        margin-top: 10px;
+        width: 100%;
+    }
+}
+
+.recipe-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+
+    &__heading {
+        color: $color-accent;
+        text-align: center;
+        font: $heading-font;
+        margin: 0;
+        &:after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 7px;
+            background-color: $color-accent;
+            border-radius: 5px;
+            margin: 0 auto;
+            margin-top: 10px;
+        }
+    }
+
+    &__item {
+        width: 100%;
+    }
+
+    &__label {
+        display: block;
+        width: 100%;
+        font: $label-font;
+    }
+
+    &__input {
+        width: 100%;
+        border: 1px solid $input-border-color;
+        background-color: white;
+        border-radius: 0;
+        height: 50px;
+        padding: 0;
+        padding-left: 5px;
+        font-size: 28px;
+        font: $input-font;
+
+        &--big {
+            height: 150px;
+            resize: none;
+            padding-top: 5px;
+        }
+
+        &--file {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+
+            & + label {
+                font: $input-font;
+                color: white;
+                background-color: $color-primary;
+                display: inline-block;
+                cursor: pointer;
+                transition: background-color 1s;
+                padding: 5px;
+                border-radius: 5px;
+                text-align: center;
+                width: 100%;
+            }
+            &:focus + label,
+            & + label:hover {
+                background-color: rgba($color-primary, 0.8);
+            }
+        }
+    }
+
+    &__button {
+        display: block;
+        width: 100%;
+        height: 50px;
+        background-color: $color-primary;
+        color: white;
+        font: $input-font;
+        align-self: flex-end;
+        border: 0px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: rgba($color-primary, 0.8);
+        }
+
+        &--delete {
+            background-color: $color-accent;
+            color: white;
+        }
+
+        &--delete:hover {
+            background-color: rgba($color-accent, 0.8);
+        }
+
+        &--delete-small {
+            background-color: $color-accent;
+            color: white;
+            width: 40px;
+            height: 40px;
+            position: relative;
+            border-radius: 50%;
+            &:after {
+                @extend .material-icons;
+                content: 'close';
+                position: absolute;
+                font-size: 20px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        &--delete-small:hover {
+            background-color: rgba($color-accent, 0.8);
+        }
+
+        &--submit {
+            background-color: rgb(163, 2, 2);
+        }
+    }
+
+    &__step {
+        // width: calc(100% + 640px - 614px);
+        // margin-left: calc((640px - 614px) / -2);
+        border: 2px solid $color-gray;
+        box-shadow: 0 15px 15px -5px $color-gray;
+        padding-right: 24px;
+        padding-left: 24px;
+        padding-bottom: 24px;
+        border-radius: 20px;
+    }
+
+    &__step-header {
+        font: $heading-font;
+        text-align: center;
+        border: 0;
+        box-shadow: none;
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    &__preview-image {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+}
+
+.wrapper {
+    &-ingredient {
+        display: flex;
+
+        &__item {
+            margin-left: 10px;
+            flex-basis: 100px;
+            align-self: flex-end;
+
+            &--name {
+                flex-grow: 3;
+                margin-left: 0;
+            }
+            &--button {
+                flex-basis: 50px;
+                padding-bottom: 7.5px;
+            }
+        }
+    }
+
+    &-timer {
+        display: flex;
+
+        &__item {
+            margin-left: 5px;
+            flex-basis: 50px;
+            align-self: flex-end;
+
+            &--time {
+                flex-grow: 3;
+            }
+
+            &--format {
+                flex-basis: 25%;
+            }
+        }
+
+        &__item:first-child {
+            margin-left: 0;
+        }
+    }
+}
+
+.section-add-recipe__heading {
+    padding-top: 60px;
+}
+
+.section-add-recipe__heading + .recipe-form {
+    padding-top: 84px;
+}
+
+.recipe-form__heading + .recipe-form__item,
+.recipe-form__heading + .wrapper,
+.recipe-form__heading + .recipe-form__step {
+    margin-top: 36px;
+}
+
+.recipe-form__item + .recipe-form__item,
+.recipe-form__item + .wrapper,
+.wrapper + .recipe-form__button,
+.wrapper + .wrapper,
+.recipe-form__step + .recipe-form__step {
+    margin-top: 25px;
+}
+
+.recipe-form__label + * {
+    margin-top: 10px;
+}
+
+.recipe-form__input[type='file'] + label {
+    margin-top: 10px;
+}
+
+.recipe-form__item + .recipe-form__heading {
+    margin-top: 84px;
+}
+
+.wrapper + .wrapper {
+    margin-top: 25px;
+}
+
+.recipe-form__button + .recipe-form__heading {
+    margin-top: 84px;
+}
+
+.recipe-form__step + .recipe-form__button {
+    margin-top: 50px;
+}
+
+.recipe-form__button + .recipe-form__button {
+    margin-top: 25px;
+}
+
+.recipe-form__button--submit {
+    margin-bottom: 500px;
+}

@@ -1,11 +1,12 @@
 extends layout/layout.pug
-block content
-    .form-container
-        .form-row
-            h1 Тест загрузки картинок
-            label(for="fileButton")
-            input(type="file" name="image" id="fileButton")
-            progress(value="0" max="100" id="upload-progress-bar")
-            a.upload-url
-        button.upload-button Загрузить
-    script(src="js/main-firestore-test.bundle.js")
+block main
+    main.container.container--firestore-test
+        section.firestore-test
+            h1.firestore-test__header Тест загрузки картинок
+            form.firestore-test__form
+                label.firestore-test__label(for="fileButton")
+                input.firestore-test__file-button(type="file" name="image" id="fileButton")
+                progress.firestore-test__progress(value="0" max="100" id="upload-progress-bar")
+                a.firestore-test__upload-url
+            button.firestore-test__upload-button Загрузить
+
