@@ -357,7 +357,7 @@ body {
 .choices,
 .choices__list--multiple .choices__item,
 .choices__list--multiple .choices__item.is-highlighted {
-  font: 400 20px "Open Sans", sans-serif; }
+  font: 400 16px "Open Sans", sans-serif; }
 
 .choices__list--multiple .choices__item,
 .choices__list--multiple .choices__item.is-highlighted {
@@ -411,6 +411,11 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: stretch; }
+  .recipe-form__section {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0; }
   .recipe-form__heading {
     color: #009688;
     text-align: center;
@@ -436,11 +441,11 @@ body {
     border: 1px solid #e5e5e5;
     background-color: white;
     border-radius: 0;
-    height: 50px;
+    height: 40px;
     padding: 0;
     padding-left: 5px;
     font-size: 28px;
-    font: 400 20px "Open Sans", sans-serif; }
+    font: 400 16px "Open Sans", sans-serif; }
     .recipe-form__input--big {
       height: 150px;
       resize: none;
@@ -453,7 +458,7 @@ body {
       position: absolute;
       z-index: -1; }
       .recipe-form__input--file + label {
-        font: 400 20px "Open Sans", sans-serif;
+        font: 600 16px "Open Sans", sans-serif;
         color: white;
         background-color: #e59b44;
         display: inline-block;
@@ -462,18 +467,18 @@ body {
         padding: 5px;
         border-radius: 5px;
         text-align: center;
-        width: 100%; }
+        width: 25%; }
       .recipe-form__input--file:focus + label,
       .recipe-form__input--file + label:hover {
         background-color: rgba(229, 155, 68, 0.8); }
   .recipe-form__button {
-    display: block;
-    width: 100%;
+    display: inline-block;
+    width: 50%;
     height: 50px;
     background-color: #e59b44;
     color: white;
-    font: 400 20px "Open Sans", sans-serif;
-    align-self: flex-end;
+    font: 600 16px "Open Sans", sans-serif;
+    align-self: center;
     border: 0px;
     border-radius: 5px;
     transition: background-color 0.3s; }
@@ -502,13 +507,24 @@ body {
       background-color: rgba(0, 150, 136, 0.8); }
     .recipe-form__button--submit {
       background-color: #a30202; }
+    .recipe-form__button--submit:hover {
+      background-color: rgba(163, 2, 2, 0.8); }
+    .recipe-form__button--reset {
+      background-color: gray; }
+    .recipe-form__button--reset:hover {
+      background-color: rgba(128, 128, 128, 0.8); }
   .recipe-form__step {
-    border: 2px solid #d3d3d3;
-    box-shadow: 0 15px 15px -5px #d3d3d3;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #e5e5e5;
+    box-shadow: 0 15px 15px -5px #e5e5e5;
     padding-right: 24px;
     padding-left: 24px;
     padding-bottom: 24px;
-    border-radius: 20px; }
+    border-radius: 20px;
+    align-items: center;
+    justify-items: center;
+    justify-content: center; }
   .recipe-form__step-header {
     font: 700 32px "Merriweather", serif;
     text-align: center;
@@ -531,8 +547,7 @@ body {
       flex-grow: 3;
       margin-left: 0; }
     .wrapper-ingredient__item--button {
-      flex-basis: 50px;
-      padding-bottom: 7.5px; }
+      flex-basis: 50px; }
 
 .wrapper-timer {
   display: flex; }
@@ -547,7 +562,7 @@ body {
   .wrapper-timer__item:first-child {
     margin-left: 0; }
 
-.section-add-recipe__heading {
+.recipe-form__section + .recipe-form__section {
   padding-top: 60px; }
 
 .section-add-recipe__heading + .recipe-form {
@@ -555,7 +570,9 @@ body {
 
 .recipe-form__heading + .recipe-form__item,
 .recipe-form__heading + .wrapper,
-.recipe-form__heading + .recipe-form__step {
+.recipe-form__heading + .recipe-form__step,
+.recipe-form__button--submit,
+.recipe-form__heading + .recipe-form__button {
   margin-top: 36px; }
 
 .recipe-form__item + .recipe-form__item,
@@ -571,20 +588,23 @@ body {
 .recipe-form__input[type='file'] + label {
   margin-top: 10px; }
 
-.recipe-form__item + .recipe-form__heading {
-  margin-top: 84px; }
-
-.wrapper + .wrapper {
-  margin-top: 25px; }
-
-.recipe-form__button + .recipe-form__heading {
+.recipe-form__item + .recipe-form__heading,
+.recipe-form__button + .recipe-form__heading,
+.recipe-form__button--submit {
   margin-top: 84px; }
 
 .recipe-form__step + .recipe-form__button {
   margin-top: 50px; }
 
-.recipe-form__button + .recipe-form__button {
+.recipe-form__step > .recipe-form__button {
+  margin-left: 25%; }
+
+label + .recipe-form__preview-image {
   margin-top: 25px; }
 
-.recipe-form__button--submit {
-  margin-bottom: 500px; }
+.recipe-form__button--reset {
+  margin-top: 25px;
+  margin-bottom: 25px; }
+
+.recipe-form__button {
+  text-align: center; }

@@ -14,6 +14,17 @@ const RecipeSchema = new Schema(
             type: String,
             // required: [true, "Description is required"]
         },
+        categories: [
+            {
+                type: String,
+            },
+        ],
+        imagePreviewDownloadUrl: {
+            type: String,
+        },
+        imagePreviewAbsoluteUrl: {
+            type: String,
+        },
         ingredients: [
             {
                 name: String,
@@ -32,11 +43,9 @@ const RecipeSchema = new Schema(
                 timer: {
                     type: Number,
                 },
-            },
-        ],
-        categories: [
-            {
-                type: String,
+                timeUnit: {
+                    type: String,
+                },
             },
         ],
         originalRecipeUrl: String,

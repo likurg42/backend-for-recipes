@@ -27,7 +27,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(compression());
 app.use(logger('dev'));
 app.use(cookieParser());
-app.use(cors({ origin: '*' }));
+app.use(cors());
 
 // public
 app.use(express.static('public'));

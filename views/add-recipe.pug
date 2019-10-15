@@ -4,76 +4,82 @@ block main
         h1.visually-hidden Форма добавления реце
         section.section-add-recipe
             h2.section-add-recipe__heading Добавить рецепт
-            form.recipe-form(action="/api/recipes" class="form" enctype="multipart/form-data" method="post")
-                h3.recipe-form__heading Описание рецепта
-                .recipe-form__item
-                    label.recipe-form__label(for="recipeName") Название рецепта
-                    input.recipe-form__input(type="text" name="recipeName" id="recipeName")
-                .recipe-form__item
-                    label.recipe-form__label(for="recipeDescription") Описание рецепта
-                    textarea.recipe-form__input.recipe-form__input--big(name="recipeDescription" id="recipeDescription")
-                .recipe-form__item
-                    label.recipe-form__label Превью рецепта
-                    input.recipe-form__input.recipe-form__input--file(name="recipePreviewImg" id="recipePreviewImg" type="file")
-                    label(for="recipePreviewImg") Выбрать файл
-                .recipe-form__item.wrapper-image-box
-                    img.recipe-form__preview-image(src="")
-                .recipe-form__item
-                    label.recipe-form__label(for="recipeCategories") Категории
-                    select.recipe-form__input.recipe-form__input--multiple(name="recipeCategories" id="recipeCategories" multiple="multiple")
-                        option Завтрак
-                        option Обед
-                        option Ужин
-                h3.recipe-form__heading Ингредиеты
-                //- .wrapper.wrapper-ingredient
-                //-     .wrapper-ingredient__item.wrapper-ingredient__item--name
-                //-         .recipe-form__item
-                //-             label.recipe-form__label(for="ingredientName") Название
-                //-             input.recipe-form__input(id="ingredientName" name="ingredientName")
-                //-     .wrapper-ingredient__item.wrapper-ingredient__item--amount
-                //-         .recipe-form__item
-                //-             label.recipe-form__label(for="ingredientAmount") Объем
-                //-             input.recipe-form__input(id="ingredientAmount" name="ingredientAmount")
-                //-     .wrapper-ingredient__item.wrapper-ingredient__item--unit
-                //-         .recipe-form__iterm
-                //-             label.recipe-form__label(for="ingredientUnit") Тип
-                //-             select.recipe-form__input(id="ingredientUnit" name="ingredientUnit")
-                //-                 option мл.
-                //-                 option л.
-                //-                 option мг.
-                //-                 option г.
-                //-                 option кг.
-                //-                 option ложка
-                //-                 option стакан
-                //-     .wrapper-ingredient__item.wrapper-ingredient__item--button
-                //-         button.recipe-form__button.recipe-form__button--delete.recipe-form__button--delete-small.wrapper-ingredient__button
-                button.recipe-form__button.recipe-form__button--add-ingredient Добавить Ингредиент
-                h3.recipe-form__heading Шаги
-                //- fieldset.recipe-form__step
-                //-     legend.recipe-form__step-header Шаг 1
-                //-     .recipe-form__item
-                //-         label.recipe-form__label(for="stepDescription") Описание шага
-                //-         textarea.recipe-form__input.recipe-form__input--big(name="stepDescription" id="stepDescription")
-                //-     .recipe-form__item
-                //-         label.recipe-form__label Картинка к шагу
-                //-         input.recipe-form__input.recipe-form__input--file(type="file" name="stepPreviewImg" id="stepPreviewImg")
-                //-         label(for="stepPreviewImg") Выбрать файл
-                //-         img.recipe-form__preview-image()
-                //-     .wrapper.wrapper-timer
-                //-         .wrapper-timer__item.wrapper-timer__item--time
-                //-             .recipe-form__item
-                //-                 label.recipe-form__label(for="stepTimer") Таймер
-                //-                 input.recipe-form__input(name="stepTimer" id="stepTimer")
-                //-         .wrapper-timer__item
-                //-             .recipe-form__item.wrapper-timer__format
-                //-                 label.recipe-form__label(for="stepTimerUnit") Формат
-                //-                 select.recipe-form__input(name="stepTimerUnit" id="stepTimerUnit")
-                //-                     option с.
-                //-                     option м.
-                //-                     option ч.
-                //-     button.recipe-form__button.recipe-form__button--delete Удалить шаг
-                button.recipe-form__button.recipe-form__button--add-step Добавить новый шаг
-                button.recipe-form__button.recipe-form__button--submit Загрузить рецепт
+            form.recipe-form(action="" class="form" method="post" name="recipeForm")
+                section.recipe-form__section.recipe-form__section--info
+                    h3.recipe-form__heading Описание рецепта
+                    .recipe-form__item
+                        label.recipe-form__label(for="name") Название рецепта
+                        input.recipe-form__input(type="text" name="name" id="name")
+                    .recipe-form__item
+                        label.recipe-form__label(for="description") Описание рецепта
+                        textarea.recipe-form__input.recipe-form__input--big(name="description" id="description")
+                    .recipe-form__item
+                        label.recipe-form__label Превью рецепта
+                        input.recipe-form__input.recipe-form__input--file(name="imagePreviewDownloadUrl" id="imagePreviewDownloadUrl" type="file")
+                        label(for="imagePreviewDownloadUrl") Выбрать файл
+                        img.recipe-form__preview-image.recipe-form__preview-image--cover-image(src="")
+                        input(type="hidden" name="imagePreviewAbsoluteUrl")
+                    .recipe-form__item
+                        label.recipe-form__label(for="categories") Категории
+                        select.recipe-form__input.recipe-form__input--multiple(name="categories" id="categories" multiple="multiple")
+                            //- option Завтрак
+                            //- option Обед
+                            //- option Ужин
+                section.recipe-form__section.recipe-form__section--ingredients
+                    h3.recipe-form__heading Ингредиеты
+                    //- .wrapper.wrapper-ingredient.recipe-form__ingredient
+                    //-     .wrapper-ingredient__item.wrapper-ingredient__item--name
+                    //-         .recipe-form__item
+                    //-             label.recipe-form__label(for="ingredientName") Название
+                    //-             input.recipe-form__input(id="ingredientName" name="ingredientName")
+                    //-     .wrapper-ingredient__item.wrapper-ingredient__item--amount
+                    //-         .recipe-form__item
+                    //-             label.recipe-form__label(for="ingredientAmount") Объем
+                    //-             input.recipe-form__input(id="ingredientAmount" name="ingredientAmount")
+                    //-     .wrapper-ingredient__item.wrapper-ingredient__item--unit
+                    //-         .recipe-form__item
+                    //-             label.recipe-form__label(for="ingredientUnit") Тип
+                    //-             select.recipe-form__input(id="ingredientUnit" name="ingredientUnit")
+                    //-                 option(disabled selected value) -- select an option
+                    //-                 option мл.
+                    //-                 option л.
+                    //-                 option мг.
+                    //-                 option г.
+                    //-                 option кг.
+                    //-                 option ложка
+                    //-                 option стакан
+                    //-     .wrapper-ingredient__item.wrapper-ingredient__item--button
+                    //-         button.recipe-form__button.recipe-form__button--delete.recipe-form__button--delete-small(type="button")
+                    button.recipe-form__button.recipe-form__button--add-ingredient(type="button") Добавить Ингредиент
+                section.recipe-form__section.recipe-form__section--steps
+                    h3.recipe-form__heading Шаги
+                    //- fieldset.recipe-form__step
+                    //-     legend.recipe-form__step-header Шаг 1
+                    //-     .recipe-form__item
+                    //-         label.recipe-form__label(for="stepDescription") Описание шага
+                    //-         textarea.recipe-form__input.recipe-form__input--big(name="stepDescription" id="stepDescription")
+                    //-     .recipe-form__item
+                    //-         label.recipe-form__label Картинка к шагу
+                    //-         input.recipe-form__input.recipe-form__input--file(type="file" name="stepPreviewImg" id="stepPreviewImg")
+                    //-         label(for="stepPreviewImg") Выбрать файл
+                    //-         img.recipe-form__preview-image.recipe-form__preview-image--step-image
+                    //-     .wrapper.wrapper-timer
+                    //-         .wrapper-timer__item.wrapper-timer__item--time
+                    //-             .recipe-form__item
+                    //-                 label.recipe-form__label(for="stepTimer") Таймер
+                    //-                 input.recipe-form__input(name="stepTimer" id="stepTimer")
+                    //-         .wrapper-timer__item
+                    //-             .recipe-form__item.wrapper-timer__format
+                    //-                 label.recipe-form__label(for="stepTimerUnit") Формат
+                    //-                 select.recipe-form__input(name="stepTimerUnit" id="stepTimerUnit")
+                    //-                     option(disabled selected value) -- select an option
+                    //-                     option с.
+                    //-                     option м.
+                    //-                     option ч.
+                    //-     button.recipe-form__button.recipe-form__button--delete(type="button") Удалить шаг
+                    button.recipe-form__button.recipe-form__button--add-step(type="button") Добавить новый шаг
+                button.recipe-form__button.recipe-form__button--submit(type="submit") Загрузить рецепт
+                button.recipe-form__button.recipe-form__button--reset(type="reset") Обнулить форму
 
 
 

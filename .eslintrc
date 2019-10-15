@@ -15,7 +15,8 @@
     },
     "rules": {
         "indent": ["error", 4],
-        "no-console": "off",
-        "arrow-body-style": 0
+        "no-console": "warn",
+        "arrow-body-style": 0,
+        "operator-linebreak": 0
     }
 }

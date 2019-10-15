@@ -5,13 +5,15 @@
 $background-color: #f6f6f6;
 $color-accent: rgb(0, 150, 136);
 $color-primary: rgb(229, 155, 68);
-$input-backgroud: #f5f5f5;
-$input-border-color: #e5e5e5;
+$input-backgroud: rgb(245, 245, 245);
+$input-border-color: rgb(229, 229, 229);
 $color-gray: #d3d3d3;
+$color-red: rgb(163, 2, 2);
 
 $heading-font: 700 32px 'Merriweather', serif;
 $label-font: 600 22px 'Open Sans', sans-serif;
-$input-font: 400 20px 'Open Sans', sans-serif;
+$input-font: 400 16px 'Open Sans', sans-serif;
+$button-font: 600 16px 'Open Sans', sans-serif;
 
 html {
     box-sizing: border-box;
@@ -113,6 +115,13 @@ body {
     justify-content: center;
     align-items: stretch;
 
+    &__section {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        padding: 0;
+    }
+
     &__heading {
         color: $color-accent;
         text-align: center;
@@ -145,7 +154,7 @@ body {
         border: 1px solid $input-border-color;
         background-color: white;
         border-radius: 0;
-        height: 50px;
+        height: 40px;
         padding: 0;
         padding-left: 5px;
         font-size: 28px;
@@ -166,7 +175,7 @@ body {
             z-index: -1;
 
             & + label {
-                font: $input-font;
+                font: $button-font;
                 color: white;
                 background-color: $color-primary;
                 display: inline-block;
@@ -175,7 +184,7 @@ body {
                 padding: 5px;
                 border-radius: 5px;
                 text-align: center;
-                width: 100%;
+                width: 25%;
             }
             &:focus + label,
             & + label:hover {
@@ -185,13 +194,13 @@ body {
     }
 
     &__button {
-        display: block;
-        width: 100%;
+        display: inline-block;
+        width: 50%;
         height: 50px;
         background-color: $color-primary;
         color: white;
-        font: $input-font;
-        align-self: flex-end;
+        font: $button-font;
+        align-self: center;
         border: 0px;
         border-radius: 5px;
         transition: background-color 0.3s;
@@ -232,19 +241,36 @@ body {
         }
 
         &--submit {
-            background-color: rgb(163, 2, 2);
+            background-color: $color-red;
+        }
+
+        &--submit:hover {
+            background-color: rgba($color-red, 0.8);
+        }
+
+        &--reset {
+            background-color: gray;
+        }
+
+        &--reset:hover {
+            background-color: rgba(gray, 0.8);
         }
     }
 
     &__step {
         // width: calc(100% + 640px - 614px);
         // margin-left: calc((640px - 614px) / -2);
-        border: 2px solid $color-gray;
-        box-shadow: 0 15px 15px -5px $color-gray;
+        display: flex;
+        flex-direction: column;
+        border: 2px solid $input-border-color;
+        box-shadow: 0 15px 15px -5px $input-border-color;
         padding-right: 24px;
         padding-left: 24px;
         padding-bottom: 24px;
         border-radius: 20px;
+        align-items: center;
+        justify-items: center;
+        justify-content: center;
     }
 
     &__step-header {
@@ -278,7 +304,6 @@ body {
             }
             &--button {
                 flex-basis: 50px;
-                padding-bottom: 7.5px;
             }
         }
     }
@@ -306,7 +331,7 @@ body {
     }
 }
 
-.section-add-recipe__heading {
+.recipe-form__section + .recipe-form__section {
     padding-top: 60px;
 }
 
@@ -316,7 +341,9 @@ body {
 
 .recipe-form__heading + .recipe-form__item,
 .recipe-form__heading + .wrapper,
-.recipe-form__heading + .recipe-form__step {
+.recipe-form__heading + .recipe-form__step,
+.recipe-form__button--submit,
+.recipe-form__heading + .recipe-form__button {
     margin-top: 36px;
 }
 
@@ -336,15 +363,9 @@ body {
     margin-top: 10px;
 }
 
-.recipe-form__item + .recipe-form__heading {
-    margin-top: 84px;
-}
-
-.wrapper + .wrapper {
-    margin-top: 25px;
-}
-
-.recipe-form__button + .recipe-form__heading {
+.recipe-form__item + .recipe-form__heading,
+.recipe-form__button + .recipe-form__heading,
+.recipe-form__button--submit {
     margin-top: 84px;
 }
 
@@ -352,10 +373,19 @@ body {
     margin-top: 50px;
 }
 
-.recipe-form__button + .recipe-form__button {
+.recipe-form__step > .recipe-form__button {
+    margin-left: 25%;
+}
+
+label + .recipe-form__preview-image {
     margin-top: 25px;
 }
 
-.recipe-form__button--submit {
-    margin-bottom: 500px;
+.recipe-form__button--reset {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.recipe-form__button {
+    text-align: center;
 }

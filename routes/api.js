@@ -78,4 +78,15 @@ router.delete('/recipes/:id', (req, res, next) => {
         .catch(next);
 });
 
+router.post('/echo', (req, res) => {
+    console.log('Content-Type:', req.get('Content-Type'));
+    console.log('Data:', req.body);
+    // res = res.status(200);
+    // if (req.get('Content-Type')) {
+    //     console.log(`Content-Type: ${req.get('Content-Type')}`);
+    //     res = res.type(req.get('Content-Type'));
+    // }
+    res.end(JSON.stringify(req.body, null, 2));
+});
+
 module.exports = router;
