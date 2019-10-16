@@ -127,7 +127,7 @@ if (document.querySelector('.recipe-form')) {
                                id="imageDownloadUrl-${pos}">
                         <label for="imageDownloadUrl-${pos}">Выбрать файл</label>
                         <img class="recipe-form__preview-image recipe-form__preview-image--step-image">
-                        <input type="hidden" name="imageAbsoluteUrl-${pos}">
+                        <input type="hidden" name="imageAbsolutePath-${pos}">
 
                     </div>
                     <div class="wrapper wrapper-timer">
@@ -260,7 +260,9 @@ if (document.querySelector('.recipe-form')) {
         const newStep = htmlToElement(createStepHTML(newStepNumber + 1));
         const fileUpload = newStep.querySelector('.recipe-form__input--file');
         const stepImagePreview = newStep.querySelector('.recipe-form__preview-image--step-image');
-        const absoluteUrl = newStep.querySelector(`[name="imageAbsoluteUrl-${newStepNumber + 1}"]`);
+        const absolutePath = newStep.querySelector(
+            `[name="imageAbsolutePath-${newStepNumber + 1}"]`,
+        );
 
         fileUpload.addEventListener('change', (e) => {
             const file = e.target.files[0];
@@ -276,7 +278,7 @@ if (document.querySelector('.recipe-form')) {
 
             const filePath = `${pathToImages}/${recipeID}/${date.getTime()}`;
 
-            absoluteUrl.value = filePath;
+            absolutePath.value = filePath;
             const storageRef = storage().ref(filePath);
             uploadStepImagesTasks.push([file, storageRef, fileUpload]);
         });
@@ -472,7 +474,9 @@ if (document.querySelector('.recipe-form')) {
     addIngredientButtonParent.insertBefore(initIngredientElement(), addIngredientButton);
 
     const recipePreviewFileUpload = infoSection.querySelector('.recipe-form__input--file');
-    const recipePreviewAbsoluteUrl = infoSection.querySelector('[name="imagePreviewAbsoluteUrl"]');
+    const recipePreviewAbsolutePath = infoSection.querySelector(
+        '[name="imagePreviewAbsolutePath"]',
+    );
     const recipeImagePreview = infoSection.querySelector(
         '.recipe-form__preview-image--cover-image',
     );
@@ -480,7 +484,7 @@ if (document.querySelector('.recipe-form')) {
         const file = e.target.files[0];
         recipeImagePreview.src = URL.createObjectURL(file);
         const filePath = `${pathToImages}/${recipeID}/preview`;
-        recipePreviewAbsoluteUrl.value = filePath;
+        recipePreviewAbsolutePath.value = filePath;
         const storageRef = storage().ref(filePath);
         uploadPreviewImagesTasks.push([file, storageRef, recipePreviewFileUpload]);
     });
