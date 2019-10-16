@@ -2,8 +2,8 @@ extends layout/layout.pug
 block main
     main.container.container--add-recipe
         h1.visually-hidden Форма добавления реце
-        section.section-add-recipe
-            h2.section-add-recipe__heading Добавить рецепт
+        section.section.add-recipe
+            h2.add-recipe__heading Добавить рецепт
             form.recipe-form(action="" class="form" method="post" name="recipeForm")
                 section.recipe-form__section.recipe-form__section--info
                     h3.recipe-form__heading Описание рецепта
@@ -80,6 +80,13 @@ block main
                     button.recipe-form__button.recipe-form__button--add-step(type="button") Добавить новый шаг
                 button.recipe-form__button.recipe-form__button--submit(type="submit") Загрузить рецепт
                 button.recipe-form__button.recipe-form__button--reset(type="reset") Обнулить форму
-
-
-
+        section.modal.modal-after-upload.visually-hidden
+            .modal-after-upload__content
+                h2.modal-after-upload__header.visually-hidden
+                p.modal-after-upload__text Загружаю
+                //- .progress
+                //-     progress.modal-after-upload__progress-bar(max="100" value="0")
+                //-     .progress-value
+                //-     .progress-bg
+                //-         .progress-bar
+                button.modal-after-upload__button(type="button" disabled) Новый рецепт

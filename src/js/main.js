@@ -58,6 +58,14 @@ if (document.querySelector('.recipe-form')) {
     const infoSection = recipeForm.querySelector('.recipe-form__section--info');
     const ingredientsSection = recipeForm.querySelector('.recipe-form__section--ingredients');
     const stepsSection = recipeForm.querySelector('.recipe-form__section--steps');
+    const modalAfterUpload = document.querySelector('.modal-after-upload');
+    const modalWindowText = modalAfterUpload.querySelector('.modal-after-upload__text');
+    const modalButton = modalAfterUpload.querySelector('.modal-after-upload__button');
+
+    modalButton.addEventListener('click', () => {
+        window.scrollTo(0, 0);
+        document.location.reload(true);
+    });
 
     const mealCategories = [
         { value: 'Завтрак', label: 'Завтрак' },
@@ -83,6 +91,19 @@ if (document.querySelector('.recipe-form')) {
         const trimmedHTML = html.trim();
         template.innerHTML = trimmedHTML;
         return template.content.firstChild;
+    };
+
+    const modalProgressBar = () => {
+        return `<div class="progress">
+                    <progress class="modal-after-upload__progress-bar"
+                              max="100"
+                              value="0">
+                    </progress>
+                    <div class="progress-value"></div>
+                    <div class="progress-bg">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>`;
     };
 
     const createStepHTML = (pos) => {
@@ -242,6 +263,13 @@ if (document.querySelector('.recipe-form')) {
             stepImagePreview.src = URL.createObjectURL(file);
 
             const date = new Date();
+
+            uploadStepImagesTasks.forEach((task, i) => {
+                if (task[2] === fileUpload) {
+                    uploadStepImagesTasks.splice(i, 1);
+                }
+            });
+
             absoluteUrl.value = `images-for-recipes/${recipeID}/${date.getTime()}`;
             const storageRef = storage().ref(`images-for-recipes/${recipeID}/${date.getTime()}`);
             uploadStepImagesTasks.push([file, storageRef, fileUpload]);
@@ -300,11 +328,16 @@ if (document.querySelector('.recipe-form')) {
 
     const uploadImage = (file, ref) => {
         return new Promise((resolve, reject) => {
+            const newProgressBar = htmlToElement(modalProgressBar());
+            modalButton.parentNode.insertBefore(newProgressBar, modalButton);
             const task = ref.put(file);
+            const progressBar = newProgressBar.querySelector('.modal-after-upload__progress-bar');
+            progressBar.value = 0;
             task.on(
                 'state_changed',
                 (snapshot) => {
-                    const percentage = snapshot.bytesTransferred / snapshot.totalBytes;
+                    const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    progressBar.value = percentage;
                 },
                 (error) => {
                     console.error(error);
@@ -319,8 +352,27 @@ if (document.querySelector('.recipe-form')) {
         });
     };
 
+    const postData = (url = '', data = {}) => {
+        return new Promise((resolve) => {
+            fetch(url, {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                redirect: 'follow',
+                referrer: 'no-referrer',
+                body: JSON.stringify(data),
+            }).then((res) => resolve(res.json()));
+        });
+    };
+
     recipeForm.addEventListener('submit', (e) => {
         e.preventDefault();
+
+        modalAfterUpload.classList.remove('visually-hidden');
 
         const recipe = {};
         recipe.ingredients = [];
@@ -352,47 +404,44 @@ if (document.querySelector('.recipe-form')) {
             recipe.steps.push(step);
         });
 
-        const postData = (url = '', data = {}) => {
-            return new Promise((resolve) => {
-                fetch(url, {
-                    method: 'POST',
-                    mode: 'cors',
-                    cache: 'no-cache',
-                    credentials: 'same-origin',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    redirect: 'follow',
-                    referrer: 'no-referrer',
-                    body: JSON.stringify(data),
-                }).then((res) => resolve(res.json()));
-            });
-        };
-
         const uploadStepImages = (tasks) => {
             return new Promise((resolve) => {
-                tasks.forEach(async ([file, storageRef], i) => {
-                    recipe.steps[i].imageDownloadUrl = await uploadImage(file, storageRef);
-                    if (recipe.steps[i].imageDownloadUrl && i === tasks.length - 1) {
-                        resolve();
-                    }
-                });
+                if (tasks.length > 0) {
+                    tasks.forEach(async ([file, storageRef], i) => {
+                        recipe.steps[i].imageDownloadUrl = await uploadImage(file, storageRef);
+                        if (recipe.steps[i].imageDownloadUrl && i === tasks.length - 1) {
+                            resolve();
+                        }
+                    });
+                } else {
+                    resolve();
+                }
             });
         };
 
         const uploadPreviewImages = (tasks) => {
             return new Promise((resolve) => {
-                tasks.forEach(async ([file, storageRef], i) => {
-                    recipe.imagePreviewDownloadUrl = await uploadImage(file, storageRef);
-                    if (recipe.imagePreviewDownloadUrl && i === tasks.length - 1) {
-                        resolve();
-                    }
-                });
+                if (tasks.length > 0) {
+                    tasks.forEach(async ([file, storageRef], i) => {
+                        recipe.imagePreviewDownloadUrl = await uploadImage(file, storageRef);
+                        if (recipe.imagePreviewDownloadUrl && i === tasks.length - 1) {
+                            resolve();
+                        }
+                    });
+                } else {
+                    resolve();
+                }
             });
         };
         uploadPreviewImages(uploadPreviewImagesTasks).then(() => {
             uploadStepImages(uploadStepImagesTasks).then(() => {
-                postData('http://192.168.1.19:3001/api/recipes', recipe).then((data) => {});
+                postData('https://backend-for-recipes.herokuapp.com/api/recipes', recipe)
+                    .then((data) => {
+                        modalWindowText.innerHTML = 'Готово';
+                        modalButton.removeAttribute('disabled');
+                        console.log(data);
+                    })
+                    .catch((error) => console.error(error));
             });
         });
     });

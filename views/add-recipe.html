@@ -16,98 +16,65 @@
     <header class="main-header"></header>
     <main class="container container--add-recipe">
         <h1 class="visually-hidden">Форма добавления реце</h1>
-        <section class="section-add-recipe">
-            <h2 class="section-add-recipe__heading">Добавить рецепт</h2>
+        <section class="section add-recipe">
+            <h2 class="add-recipe__heading">Добавить рецепт</h2>
             <form class="recipe-form form"
-                  action="/api/recipes"
-                  enctype="multipart/form-data"
-                  method="post">
-                <h3 class="recipe-form__heading">Описание рецепта</h3>
-                <div class="recipe-form__item"><label class="recipe-form__label"
-                           for="recipeName">Название рецепта</label><input class="recipe-form__input"
-                           type="text"
-                           name="recipeName"
-                           id="recipeName"></div>
-                <div class="recipe-form__item"><label class="recipe-form__label"
-                           for="recipeDescription">Описание рецепта</label><textarea class="recipe-form__input recipe-form__input--big"
-                              name="recipeDescription"
-                              id="recipeDescription"></textarea></div>
-                <div class="recipe-form__item"><label class="recipe-form__label">Превью рецепта</label><input class="recipe-form__input recipe-form__input--file"
-                           name="recipePreviewImg"
-                           id="recipePreviewImg"
-                           type="file"><label for="recipePreviewImg">Выбрать файл</label></div>
-                <div class="recipe-form__item wrapper-image-box"><img class="recipe-form__preview-image"
-                         src=""></div>
-                <div class="recipe-form__item"><label class="recipe-form__label"
-                           for="recipeCategories">Категории</label><select class="recipe-form__input recipe-form__input--multiple"
-                            name="recipeCategories"
-                            id="recipeCategories"
-                            multiple="multiple">
-                        <option>Завтрак</option>
-                        <option>Обед</option>
-                        <option>Ужин</option>
-                    </select></div>
-                <h3 class="recipe-form__heading">Ингредиеты</h3>
-                <div class="wrapper wrapper-ingredient">
-                    <div class="wrapper-ingredient__item wrapper-ingredient__item--name">
-                        <div class="recipe-form__item"><label class="recipe-form__label"
-                                   for="ingredientName">Название</label><input class="recipe-form__input"
-                                   id="ingredientName"
-                                   name="ingredientName"></div>
-                    </div>
-                    <div class="wrapper-ingredient__item wrapper-ingredient__item--amount">
-                        <div class="recipe-form__item"><label class="recipe-form__label"
-                                   for="ingredientAmount">Объем</label><input class="recipe-form__input"
-                                   id="ingredientAmount"
-                                   name="ingredientAmount"></div>
-                    </div>
-                    <div class="wrapper-ingredient__item wrapper-ingredient__item--unit">
-                        <div class="recipe-form__iterm"><label class="recipe-form__label"
-                                   for="ingredientUnit">Тип</label><select class="recipe-form__input"
-                                    id="ingredientUnit"
-                                    name="ingredientUnit">
-                                <option>мл.</option>
-                                <option>л.</option>
-                                <option>мг.</option>
-                                <option>г.</option>
-                                <option>кг.</option>
-                                <option>ложка</option>
-                                <option>стакан</option>
-                            </select></div>
-                    </div>
-                    <div class="wrapper-ingredient__item wrapper-ingredient__item--button"><button class="recipe-form__button recipe-form__button--delete recipe-form__button--delete-small wrapper-ingredient__button"></button></div>
-                </div><button class="recipe-form__button recipe-form__button--add-ingredient">Добавить Ингредиент</button>
-                <h3 class="recipe-form__heading">Шаги</h3>
-                <fieldset class="recipe-form__step">
-                    <legend class="recipe-form__step-header">Шаг 1</legend>
+                  action=""
+                  method="post"
+                  name="recipeForm">
+                <section class="recipe-form__section recipe-form__section--info">
+                    <h3 class="recipe-form__heading">Описание рецепта</h3>
                     <div class="recipe-form__item"><label class="recipe-form__label"
-                               for="stepDescription">Описание шага</label><textarea class="recipe-form__input recipe-form__input--big"
-                                  name="stepDescription"
-                                  id="stepDescription"></textarea></div>
-                    <div class="recipe-form__item"><label class="recipe-form__label">Картинка к шагу</label><input class="recipe-form__input recipe-form__input--file"
-                               type="file"
-                               name="stepPreviewImg"
-                               id="stepPreviewImg"><label for="stepPreviewImg">Выбрать файл</label><img class="recipe-form__preview-image"></div>
-                    <div class="wrapper wrapper-timer">
-                        <div class="wrapper-timer__item wrapper-timer__item--time">
-                            <div class="recipe-form__item"><label class="recipe-form__label"
-                                       for="stepTimer">Таймер</label><input class="recipe-form__input"
-                                       name="stepTimer"
-                                       id="stepTimer"></div>
-                        </div>
-                        <div class="wrapper-timer__item">
-                            <div class="recipe-form__item wrapper-timer__format"><label class="recipe-form__label"
-                                       for="stepTimerUnit">Формат</label><select class="recipe-form__input"
-                                        name="stepTimerUnit"
-                                        id="stepTimerUnit">
-                                    <option>с.</option>
-                                    <option>м.</option>
-                                    <option>ч.</option>
-                                </select></div>
-                        </div>
-                    </div><button class="recipe-form__button recipe-form__button--delete">Удалить шаг</button>
-                </fieldset><button class="recipe-form__button recipe-form__button--add-step">Добавить новый шаг</button><button class="recipe-form__button recipe-form__button--submit">Загрузить рецепт</button>
+                               for="name">Название рецепта</label><input class="recipe-form__input"
+                               type="text"
+                               name="name"
+                               id="name"></div>
+                    <div class="recipe-form__item"><label class="recipe-form__label"
+                               for="description">Описание рецепта</label><textarea class="recipe-form__input recipe-form__input--big"
+                                  name="description"
+                                  id="description"></textarea></div>
+                    <div class="recipe-form__item"><label class="recipe-form__label">Превью рецепта</label><input class="recipe-form__input recipe-form__input--file"
+                               name="imagePreviewDownloadUrl"
+                               id="imagePreviewDownloadUrl"
+                               type="file"><label for="imagePreviewDownloadUrl">Выбрать файл</label><img class="recipe-form__preview-image recipe-form__preview-image--cover-image"
+                             src=""><input type="hidden"
+                               name="imagePreviewAbsoluteUrl"></div>
+                    <div class="recipe-form__item"><label class="recipe-form__label"
+                               for="categories">Категории</label><select class="recipe-form__input recipe-form__input--multiple"
+                                name="categories"
+                                id="categories"
+                                multiple="multiple"></select></div>
+                </section>
+                <section class="recipe-form__section recipe-form__section--ingredients">
+                    <h3 class="recipe-form__heading">Ингредиеты</h3><button class="recipe-form__button recipe-form__button--add-ingredient"
+                            type="button">Добавить Ингредиент</button>
+                </section>
+                <section class="recipe-form__section recipe-form__section--steps">
+                    <h3 class="recipe-form__heading">Шаги</h3><button class="recipe-form__button recipe-form__button--add-step"
+                            type="button">Добавить новый шаг</button>
+                </section><button class="recipe-form__button recipe-form__button--submit"
+                        type="submit">Загрузить рецепт</button><button class="recipe-form__button recipe-form__button--reset"
+                        type="reset">Обнулить форму</button>
             </form>
+        </section>
+        <section class="modal modal-after-upload visually-hidden">
+            <div class="modal-after-upload__content">
+                <h2 class="modal-after-upload__header visually-hidden"></h2>
+                <p class="modal-after-upload__text">Загружаю</p>
+                <div class="progress">
+                    <progress class="modal-after-upload__progress-bar"
+                              max="100"
+                              value="0">
+                    </progress>
+                    <div class="progress-value"></div>
+                    <div class="progress-bg">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+                <button class="modal-after-upload__button"
+                        type="button"
+                        disabled>Новый рецепт</button>
+            </div>
         </section>
     </main>
     <footer class="main-footer"></footer>
