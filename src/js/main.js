@@ -270,8 +270,10 @@ if (document.querySelector('.recipe-form')) {
                 }
             });
 
-            absoluteUrl.value = `images-for-recipes/${recipeID}/${date.getTime()}`;
-            const storageRef = storage().ref(`images-for-recipes/${recipeID}/${date.getTime()}`);
+            const filePath = `images-for-recipes/${recipeID}/${date.getTime()}`;
+
+            absoluteUrl.value = filePath;
+            const storageRef = storage().ref(filePath);
             uploadStepImagesTasks.push([file, storageRef, fileUpload]);
         });
 
@@ -464,7 +466,7 @@ if (document.querySelector('.recipe-form')) {
     recipePreviewFileUpload.addEventListener('change', (e) => {
         const file = e.target.files[0];
         recipeImagePreview.src = URL.createObjectURL(file);
-        const filePath = `images-for-recipe/${recipeID}/preview`;
+        const filePath = `images-for-recipes/${recipeID}/preview`;
         recipePreviewAbsoluteUrl.value = filePath;
         const storageRef = storage().ref(filePath);
         uploadPreviewImagesTasks.push([file, storageRef, recipePreviewFileUpload]);
