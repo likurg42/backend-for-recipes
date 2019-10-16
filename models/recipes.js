@@ -108,6 +108,7 @@ RecipeSchema.statics = {
                 rating: 1,
                 difficulty: 1,
                 timeToComplete: 1,
+                imagePreviewDownloadUrl: 1,
             },
             cb,
         );
