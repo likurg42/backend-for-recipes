@@ -22,7 +22,7 @@ const RecipeSchema = new Schema(
         imagePreviewDownloadUrl: {
             type: String,
         },
-        imagePreviewAbsoluteUrl: {
+        imagePreviewAbsolutePath: {
             type: String,
         },
         ingredients: [
@@ -39,7 +39,7 @@ const RecipeSchema = new Schema(
                     // required: [true, "At least one step is required"]
                 },
                 imageDownloadUrl: String,
-                imageAbsoluteUrl: String,
+                imageAbsolutePath: String,
                 timer: {
                     type: Number,
                 },

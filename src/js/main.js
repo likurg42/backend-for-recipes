@@ -17,6 +17,10 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+// const testImagePath = 'images-for-recipes-test';
+
+const pathToImages = 'images-for-recipes'; // 'images-for-recipes';
+
 if (document.querySelector('.firestore-test')) {
     const uploadProgressBar = document.querySelector('.firestore-test__progress');
     const fileButton = document.querySelector('.firestore-test__file-button');
@@ -28,7 +32,7 @@ if (document.querySelector('.firestore-test')) {
         const file = e.target.files[0];
         // Create storage ref
         const date = new Date();
-        const storageRef = storage().ref(`images-for-recipes/id/${date.getTime()}`);
+        const storageRef = storage().ref(`${pathToImages}/id/${date.getTime()}`);
         // Upload file
         uploadButton.addEventListener('click', () => {
             const task = storageRef.put(file);
@@ -270,7 +274,7 @@ if (document.querySelector('.recipe-form')) {
                 }
             });
 
-            const filePath = `images-for-recipes/${recipeID}/${date.getTime()}`;
+            const filePath = `${pathToImages}/${recipeID}/${date.getTime()}`;
 
             absoluteUrl.value = filePath;
             const storageRef = storage().ref(filePath);
@@ -408,46 +412,53 @@ if (document.querySelector('.recipe-form')) {
 
         const uploadStepImages = (tasks) => {
             return new Promise((resolve) => {
+                const promises = [];
                 if (tasks.length > 0) {
-                    tasks.forEach(([file, storageRef], i) => {
-                        uploadImage(file, storageRef).then((link) => {
-                            recipe.steps[i].imageDownloadUrl = link;
-                            if (i === tasks.length - 1) {
-                                resolve();
-                            }
-                        });
+                    tasks.forEach(([file, ref]) => {
+                        promises.push(uploadImage(file, ref));
                     });
-                } else {
-                    resolve();
+
+                    Promise.all(promises).then((links) => {
+                        links.forEach((link, i) => {
+                            recipe.steps[i].imageDownloadUrl = link;
+                        });
+                        resolve();
+                    });
+                }
+            });
+        };
+        const uploadPreviewImages = (tasks) => {
+            return new Promise((resolve) => {
+                const promises = [];
+                if (tasks.length > 0) {
+                    tasks.forEach(([file, ref]) => {
+                        promises.push(uploadImage(file, ref));
+                    });
+
+                    Promise.all(promises).then((links) => {
+                        links.forEach((link) => {
+                            recipe.imagePreviewDownloadUrl = link;
+                        });
+                        resolve();
+                    });
                 }
             });
         };
 
-        const uploadPreviewImages = (tasks) => {
-            return new Promise((resolve) => {
-                if (tasks.length > 0) {
-                    tasks.forEach(async ([file, storageRef], i) => {
-                        recipe.imagePreviewDownloadUrl = await uploadImage(file, storageRef);
-                        if (recipe.imagePreviewDownloadUrl && i === tasks.length - 1) {
-                            resolve();
-                        }
-                    });
-                } else {
-                    resolve();
-                }
-            });
+        const uploadRecipe = async () => {
+            await uploadPreviewImages(uploadPreviewImagesTasks);
+            await uploadStepImages(uploadStepImagesTasks);
+
+            postData('https://backend-for-recipes.herokuapp.com/api/recipes', recipe)
+                .then((data) => {
+                    modalWindowText.innerHTML = 'Готово';
+                    modalButton.removeAttribute('disabled');
+                    console.log(data);
+                })
+                .catch((error) => console.error(error));
         };
-        uploadPreviewImages(uploadPreviewImagesTasks).then(() => {
-            uploadStepImages(uploadStepImagesTasks).then(() => {
-                postData('https://backend-for-recipes.herokuapp.com/api/recipes', recipe)
-                    .then((data) => {
-                        modalWindowText.innerHTML = 'Готово';
-                        modalButton.removeAttribute('disabled');
-                        console.log(data);
-                    })
-                    .catch((error) => console.error(error));
-            });
-        });
+
+        uploadRecipe();
     });
 
     /* INIT */
@@ -468,7 +479,7 @@ if (document.querySelector('.recipe-form')) {
     recipePreviewFileUpload.addEventListener('change', (e) => {
         const file = e.target.files[0];
         recipeImagePreview.src = URL.createObjectURL(file);
-        const filePath = `images-for-recipes/${recipeID}/preview`;
+        const filePath = `${pathToImages}/${recipeID}/preview`;
         recipePreviewAbsoluteUrl.value = filePath;
         const storageRef = storage().ref(filePath);
         uploadPreviewImagesTasks.push([file, storageRef, recipePreviewFileUpload]);

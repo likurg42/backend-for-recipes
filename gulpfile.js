@@ -11,7 +11,7 @@ const pm2 = require('pm2');
 // const uglify = require('gulp-uglify');
 // const glob = require('glob');
 // const es = require('event-stream');
-const rename = require('gulp-rename');
+// const rename = require('gulp-rename');
 const webpack = require('webpack');
 const webpackStream = require('webpack-stream');
 const webpackConfig = require('./webpack.config');
@@ -43,6 +43,7 @@ function startServer() {
     proxyServer.init({
         proxy: `localhost:${port}`,
         port: port + 1,
+        open: false,
     });
 }
 
