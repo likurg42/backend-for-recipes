@@ -409,11 +409,13 @@ if (document.querySelector('.recipe-form')) {
         const uploadStepImages = (tasks) => {
             return new Promise((resolve) => {
                 if (tasks.length > 0) {
-                    tasks.forEach(async ([file, storageRef], i) => {
-                        recipe.steps[i].imageDownloadUrl = await uploadImage(file, storageRef);
-                        if (recipe.steps[i].imageDownloadUrl && i === tasks.length - 1) {
-                            resolve();
-                        }
+                    tasks.forEach(([file, storageRef], i) => {
+                        uploadImage(file, storageRef).then((link) => {
+                            recipe.steps[i].imageDownloadUrl = link;
+                            if (i === tasks.length - 1) {
+                                resolve();
+                            }
+                        });
                     });
                 } else {
                     resolve();
