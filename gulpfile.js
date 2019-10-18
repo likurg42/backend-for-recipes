@@ -35,7 +35,7 @@ function convertSCSS() {
         .pipe(sass())
         .on('error', sass.logError)
         .pipe(concat('style.css'))
-        .pipe(gulp.dest('public/style'))
+        .pipe(gulp.dest('public/css'))
         .pipe(browserSync.stream());
 }
 
@@ -96,7 +96,7 @@ const watch = () => {
     gulp.watch('src/scss/**/**.scss', gulp.series(convertSCSS, reloadServer));
     gulp.watch('src/js/**/**.js', gulp.series(buildJS, reloadServer));
     gulp.watch(
-        ['index.js', 'models/**/**.js', 'routes/**/**.js'],
+        ['server.js', './app/**/**.js', './bin/**/**.js', './config/**/**.js', './test/**/**.js'],
         gulp.series(restartPM2, reloadServer),
     );
     gulp.watch('**/**.pug', gulp.series(reloadServer));

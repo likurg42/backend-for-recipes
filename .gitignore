@@ -4,3 +4,5 @@ node_modules/
 .vscode/
 pm2/
 *.code-workspace
+npm-debug.log
+data

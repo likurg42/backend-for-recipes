@@ -28,15 +28,11 @@ if (document.querySelector('.firestore-test')) {
     const uploadUrl = document.querySelector('.firestore-test__upload-url');
 
     fileButton.addEventListener('change', (e) => {
-        // Get file
         const file = e.target.files[0];
-        // Create storage ref
         const date = new Date();
         const storageRef = storage().ref(`${pathToImages}/id/${date.getTime()}`);
-        // Upload file
         uploadButton.addEventListener('click', () => {
             const task = storageRef.put(file);
-            // Update progress bar
             task.on(
                 'state_changed',
                 (snapshot) => {
@@ -427,6 +423,7 @@ if (document.querySelector('.recipe-form')) {
                         resolve();
                     });
                 }
+                resolve();
             });
         };
         const uploadPreviewImages = (tasks) => {
@@ -444,6 +441,7 @@ if (document.querySelector('.recipe-form')) {
                         resolve();
                     });
                 }
+                resolve();
             });
         };
 

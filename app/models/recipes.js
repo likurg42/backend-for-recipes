@@ -85,9 +85,6 @@ RecipeSchema.statics = {
                 if (query[key] !== null && Array.isArray(query[key]) && key === 'categories') {
                     mongoQuery.categories = { $in: query[key] };
                 }
-                if (query[key] !== null && Array.isArray(query[key]) && key === 'tags') {
-                    mongoQuery.tags = { $in: query[key] };
-                }
             });
             return mongoQuery;
         }
@@ -115,6 +112,6 @@ RecipeSchema.statics = {
     },
 };
 
-const Recipe = mongoose.model('recipe', RecipeSchema);
+const Recipes = mongoose.model('Recipe', RecipeSchema);
 
-module.exports = Recipe;
+module.exports = Recipes;
